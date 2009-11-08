@@ -14,6 +14,24 @@ of these assumptions easily.
 		class ApplicationController < ActionController::Base
 		  user_stamp Post, Asset, Job
 		end
+		
+3. Add the creator and updater attributes to any model you intend to 
+stamp.  There are two ways to do this:
+
+- New Table
+    create_table :table do |t|
+      t.userstamps
+    end
+    
+- Existing Table
+    add_userstamps :model
+    remove_userstamps :model
+		
+== Accessing Creator & Updater Attributes
+
+This fork automatically adds the needed belong_to statements associated 
+with a "User" table so that you can access the creator and updater 
+attributes for any model with a user stamp
 
 
 == Defaults

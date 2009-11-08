@@ -13,7 +13,13 @@ module UserStamp
   
   module ClassMethods
     def user_stamp(*models)
-      models.each { |klass| klass.add_observer(UserStampSweeper.instance) }
+      models.each { |klass| 
+        klass.add_observer(UserStampSweeper.instance) 
+        klass.class_eval do
+          belongs_to :creator, :class_name => 'User'
+          belongs_to :updater, :class_name => 'User'
+        end
+        }
       
       class_eval do
         cache_sweeper :user_stamp_sweeper
